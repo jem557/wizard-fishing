@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cgwamnymj8he8"]
+
+[ext_resource type="PackedScene" uid="uid://en583o3sp4ck" path="res://hook.tscn" id="1_pq8q7"]
+
+[node name="root" type="Node2D" unique_id=9119155]
+
+[node name="Hook" parent="." unique_id=381405936 instance=ExtResource("1_pq8q7")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=278774220]
+zoom = Vector2(3, 3)
