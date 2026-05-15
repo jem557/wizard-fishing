@@ -1,18 +1,25 @@
 extends RigidBody2D
 
 @export var lateral_force: float = 200.0
+@export var vertical_force: float = -300.0
 @export var max_lateral_speed: float = 150.0
+@export var sink_speed : float = 100 
 
 func _ready() -> void:
-	gravity_scale = 0.3  # slow sink
+	pass
 
 func _physics_process(delta: float) -> void:
+	gravity_scale = 2.0
 	var dir = 0.0
 	if Input.is_action_pressed("left"):
 		dir = -1.0
 	if Input.is_action_pressed("right"):
 		dir = 1.0
-
+	if Input.is_action_pressed("reel"):
+		apply_force(Vector2(0, vertical_force))
+			
+	if linear_velocity.y >= sink_speed:
+		linear_velocity.y = sink_speed
 	# Only apply force if under max lateral speed
 	if abs(linear_velocity.x) < max_lateral_speed:
 		apply_force(Vector2(lateral_force * dir, 0))
