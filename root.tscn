@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cgwamnymj8he8"]
 
 [ext_resource type="PackedScene" uid="uid://en583o3sp4ck" path="res://hook.tscn" id="1_pq8q7"]
+[ext_resource type="PackedScene" uid="uid://dwtt8smha2mom" path="res://Fish.tscn" id="2_pyidc"]
 
 [node name="root" type="Node2D" unique_id=9119155]
 
@@ -8,3 +9,6 @@
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=278774220]
 zoom = Vector2(3, 3)
+
+[node name="Node2D" parent="." unique_id=698032791 instance=ExtResource("2_pyidc")]
+position = Vector2(-17, 48)

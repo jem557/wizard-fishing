@@ -6,10 +6,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfyhh"]
 radius = 9.0
 
-[node name="Hook" type="RigidBody2D" unique_id=902387157]
+[node name="Hook" type="RigidBody2D" unique_id=902387157 node_paths=PackedStringArray("hookpoint") groups=["hook"]]
 gravity_scale = 2.0
 linear_damp = 0.05
 script = ExtResource("1_n13h4")
+hookpoint = NodePath("Hookpoint")
 
 [node name="Hook" type="Sprite2D" parent="." unique_id=453178009]
 texture = ExtResource("1_1mm2r")
@@ -17,3 +18,6 @@ texture = ExtResource("1_1mm2r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=427920232]
 position = Vector2(-1, 7)
 shape = SubResource("CircleShape2D_xfyhh")
+
+[node name="Hookpoint" type="Node2D" parent="." unique_id=1983281477]
+position = Vector2(-1, 12)

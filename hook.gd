@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+@export var hookpoint : Node2D
+
 @export var lateral_force: float = 200.0
 @export var vertical_force: float = -300.0
 @export var max_lateral_speed: float = 150.0
@@ -9,17 +11,26 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	gravity_scale = 2.0
+	
 	var dir = 0.0
 	if Input.is_action_pressed("left"):
 		dir = -1.0
 	if Input.is_action_pressed("right"):
 		dir = 1.0
+		
 	if Input.is_action_pressed("reel"):
 		apply_force(Vector2(0, vertical_force))
+		
+	if not Input.is_action_pressed("reel") and linear_velocity.y < 0:
+		gravity_scale = 20.0
+		
+	if linear_velocity.y > 0:
+			gravity_scale = 2.0
 			
+	# Limits the maximum velocity going down to sink_speed value. 
 	if linear_velocity.y >= sink_speed:
 		linear_velocity.y = sink_speed
+		
 	# Only apply force if under max lateral speed
 	if abs(linear_velocity.x) < max_lateral_speed:
 		apply_force(Vector2(lateral_force * dir, 0))

@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Wizard_Fishing"
-run/main_scene="uid://en583o3sp4ck"
+run/main_scene="uid://cgwamnymj8he8"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[global_group]
+
+hook=""
 
 [input]
 

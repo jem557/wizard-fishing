@@ -1,3 +1,39 @@
-[gd_scene format=3 uid="uid://dl2f0vkp4qbin"]
+[gd_scene format=3 uid="uid://dwtt8smha2mom"]
 
-[node name="Fish" type="RigidBody2D" unique_id=652817182]
+[ext_resource type="Texture2D" uid="uid://dj5s5jhm2mbhr" path="res://Fish_Test.png" id="1_8um3m"]
+[ext_resource type="Script" uid="uid://jyy1xe1m0law" path="res://fish.gd" id="1_j2ykt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2ykt"]
+radius = 7.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j2ykt"]
+radius = 7.0
+
+[node name="Node2D" type="RigidBody2D" unique_id=698032791 node_paths=PackedStringArray("sprite", "latch_point")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_j2ykt")
+sprite = NodePath("FishTest")
+latch_point = NodePath("LatchPoint")
+
+[node name="FishTest" type="Sprite2D" parent="." unique_id=1611488829]
+position = Vector2(3, -11)
+texture = ExtResource("1_8um3m")
+
+[node name="LatchPoint" type="Node2D" parent="." unique_id=785466276]
+position = Vector2(7, 2)
+
+[node name="EnvironmentCollider" type="CollisionShape2D" parent="." unique_id=2059780233]
+position = Vector2(-2, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_j2ykt")
+debug_color = Color(0.85179645, 0.36036363, 0.24940026, 0.41960785)
+
+[node name="HookArea" type="Area2D" parent="." unique_id=377730320]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HookArea" unique_id=1096664243]
+position = Vector2(3, 0)
+shape = SubResource("CircleShape2D_j2ykt")
+
+[connection signal="body_entered" from="HookArea" to="." method="_on_hook_area_body_entered"]
