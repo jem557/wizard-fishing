@@ -1,14 +1,74 @@
 [gd_scene format=3 uid="uid://cgwamnymj8he8"]
 
 [ext_resource type="PackedScene" uid="uid://en583o3sp4ck" path="res://hook.tscn" id="1_pq8q7"]
+[ext_resource type="Script" uid="uid://bmf68mwf8mesh" path="res://rod.gd" id="1_vvh5c"]
+[ext_resource type="Script" uid="uid://dlt6wv1kqocme" path="res://camera_2d.gd" id="2_28aoi"]
 [ext_resource type="PackedScene" uid="uid://dwtt8smha2mom" path="res://Fish.tscn" id="2_pyidc"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pyidc"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vvh5c"]
+
+[sub_resource type="Gradient" id="Gradient_vvh5c"]
+offsets = PackedFloat32Array(0.5558036)
+colors = PackedColorArray(0, 0.8963526, 0.8963524, 0.06666667)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vvh5c"]
+gradient = SubResource("Gradient_vvh5c")
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_28aoi"]
+gradient = SubResource("Gradient_vvh5c")
 
 [node name="root" type="Node2D" unique_id=9119155]
 
-[node name="Hook" parent="." unique_id=381405936 instance=ExtResource("1_pq8q7")]
+[node name="Rod" type="Node2D" parent="." unique_id=840836963 node_paths=PackedStringArray("anchor")]
+position = Vector2(0, -160)
+script = ExtResource("1_vvh5c")
+anchor = NodePath(".")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=278774220]
+[node name="Line2D" type="Line2D" parent="Rod" unique_id=242620021]
+z_index = 1
+width = 1.0
+default_color = Color(0.8509804, 0.85882354, 0.8666667, 0.8)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=278774220 node_paths=PackedStringArray("hook")]
 zoom = Vector2(3, 3)
+script = ExtResource("2_28aoi")
+hook = NodePath("../Hook")
+
+[node name="Hook" parent="." unique_id=381405936 instance=ExtResource("1_pq8q7")]
 
 [node name="Node2D" parent="." unique_id=698032791 instance=ExtResource("2_pyidc")]
 position = Vector2(-17, 48)
+
+[node name="left_wall" type="StaticBody2D" parent="." unique_id=261863689]
+position = Vector2(-192, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_wall" unique_id=518241574]
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_pyidc")
+
+[node name="right_wall" type="StaticBody2D" parent="." unique_id=607676138]
+position = Vector2(192, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_wall" unique_id=1532177329]
+rotation = 4.712389
+shape = SubResource("WorldBoundaryShape2D_vvh5c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1317175749]
+z_index = 2
+position = Vector2(-65078.28, 101.62343)
+rotation = -3.1415925
+scale = Vector2(1677.8086, 1677.8086)
+texture = SubResource("GradientTexture1D_vvh5c")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1496820569]
+z_index = -1
+position = Vector2(-4.5430756, 115.109634)
+rotation = 1.5707964
+scale = Vector2(2.9678936, 565.31964)
+texture = SubResource("GradientTexture1D_28aoi")
