@@ -7,10 +7,10 @@
 radius = 6.0
 
 [node name="Hook" type="RigidBody2D" unique_id=902387157 node_paths=PackedStringArray("hookpoint") groups=["hook"]]
-gravity_scale = 2.0
 linear_damp = 0.05
 script = ExtResource("1_n13h4")
 hookpoint = NodePath("Hookpoint")
+reel_speed = 5.0
 
 [node name="Hook" type="Sprite2D" parent="." unique_id=453178009]
 texture = ExtResource("1_1mm2r")
