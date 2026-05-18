@@ -5,7 +5,7 @@ extends RigidBody2D
 @export var lateral_force: float = 200.0
 @export var vertical_force: float = -300.0
 @export var max_lateral_speed: float = 150.0
-@export var sink_speed : float = 100 
+@export var max_sink_speed : float = 100 
 
 func _ready() -> void:
 	pass
@@ -27,9 +27,9 @@ func _physics_process(delta: float) -> void:
 	if linear_velocity.y > 0:
 			gravity_scale = 2.0
 			
-	# Limits the maximum velocity going down to sink_speed value. 
-	if linear_velocity.y >= sink_speed:
-		linear_velocity.y = sink_speed
+	# Limits the maximum velocity going down to max_sink_speed value. 
+	if linear_velocity.y >= max_sink_speed:
+		linear_velocity.y = max_sink_speed
 		
 	# Only apply force if under max lateral speed
 	if abs(linear_velocity.x) < max_lateral_speed:
