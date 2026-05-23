@@ -1,1 +1,4 @@
-extends CharacterBody2D
+extends StandardFish
+
+func _physics_process(delta: float) -> void:
+	pass

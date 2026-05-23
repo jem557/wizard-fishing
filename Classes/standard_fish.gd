@@ -1,3 +1,4 @@
+## Base fish class.
 class_name StandardFish
 extends CharacterBody2D
 

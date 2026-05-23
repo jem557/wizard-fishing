@@ -1,16 +1,19 @@
 [gd_scene format=3 uid="uid://b1k4agqlo0icn"]
 
+[ext_resource type="Script" uid="uid://c3snk7iby1qwb" path="res://Scenes/standard_hook.gd" id="1_4vsnl"]
 [ext_resource type="Texture2D" uid="uid://coyxdt4lbgh77" path="res://Sprites/Hook.png" id="1_ftent"]
-[ext_resource type="Script" uid="uid://cbcf4648edfji" path="res://Master_Scripts/player_hook.gd" id="1_wd5m4"]
 [ext_resource type="Script" uid="uid://3hhsfpwpbjv2" path="res://Components/input_component.gd" id="3_8jl6u"]
 [ext_resource type="Script" uid="uid://bmle53grg1ns0" path="res://Components/movement_component.gd" id="4_8jl6u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7l2t"]
 radius = 4.5
 
-[node name="Player_Hook" type="CharacterBody2D" unique_id=469962134]
+[node name="Player_Hook" type="CharacterBody2D" unique_id=34557212 node_paths=PackedStringArray("input_component", "movement_component")]
 motion_mode = 1
-script = ExtResource("1_wd5m4")
+script = ExtResource("1_4vsnl")
+input_component = NodePath("InputComponent")
+movement_component = NodePath("MovementComponent")
+metadata/_custom_type_script = "uid://cbcf4648edfji"
 
 [node name="Standard_Hook" type="Sprite2D" parent="." unique_id=1464475419]
 texture = ExtResource("1_ftent")

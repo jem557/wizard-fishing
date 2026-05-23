@@ -1,8 +1,4 @@
-class_name Player_Hook 
-extends CharacterBody2D
-
-@onready var input_component: InputComponent = $InputComponent
-@onready var movement_component: MovementComponent = $MovementComponent
+extends Hook
 
 func _physics_process(delta: float) -> void:
 	
@@ -13,4 +9,3 @@ func _physics_process(delta: float) -> void:
 	movement_component.move_dir = input_component.move_dir
 	movement_component.tick(delta)
 	movement_component._rotate(delta)
-	

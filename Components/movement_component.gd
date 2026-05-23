@@ -7,9 +7,10 @@ extends Node
 @export var speed : float = 100
 @export var acceleration : float = 30
 @export var deceleration : float = 10
-@export var max_rotation_angle : float = .4
+@export_range(0,360) var max_rotation_angle : float = 22
 
 var move_dir = Vector2.ZERO
+var rotation_angle_rad : float
 var angular_velocity : float = 0.0
 
 func tick(delta)->void:
@@ -22,12 +23,13 @@ func tick(delta)->void:
 	body.move_and_slide()
 
 func _rotate(delta) -> void:
-	var target_rotation = clampf(body.velocity.x / speed, -1, 1) * max_rotation_angle
+	rotation_angle_rad = deg_to_rad(max_rotation_angle)
+	var target_rotation = clampf(body.velocity.x / speed, -1, 1) * rotation_angle_rad
 	var error = target_rotation - body.rotation
 	angular_velocity = lerpf(angular_velocity, error * 15.0, 2.0 * delta)
 	body.rotation += angular_velocity * delta
 	
-func _flip(delta) -> void:
+func _flip() -> void:
 	if body.velocity.x > 0:
 		sprite.flip_h = true
 	elif body.velocity.x < 0:
