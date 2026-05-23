@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d0mmnss6n6gx"]
+
+[ext_resource type="Script" uid="uid://110pcbywgs3n" path="res://Scenes/carp.gd" id="1_64w8b"]
+[ext_resource type="Script" uid="uid://bmle53grg1ns0" path="res://Components/movement_component.gd" id="1_p6g6f"]
+[ext_resource type="Texture2D" uid="uid://dj5s5jhm2mbhr" path="res://Sprites/Fish_Test.png" id="2_4ime7"]
+
+[node name="Carp" type="CharacterBody2D" unique_id=276243654]
+script = ExtResource("1_64w8b")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=123075426 node_paths=PackedStringArray("body", "sprite")]
+script = ExtResource("1_p6g6f")
+body = NodePath("..")
+sprite = NodePath("../Sprite")
+metadata/_custom_type_script = "uid://bmle53grg1ns0"
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=972082948]
+texture = ExtResource("2_4ime7")

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dwtt8smha2mom"]
 
-[ext_resource type="Texture2D" uid="uid://dj5s5jhm2mbhr" path="res://Fish_Test.png" id="1_8um3m"]
-[ext_resource type="Script" uid="uid://jyy1xe1m0law" path="res://fish.gd" id="1_j2ykt"]
+[ext_resource type="Script" uid="uid://jyy1xe1m0law" path="res://testing/Fish_Test.gd" id="1_oosto"]
+[ext_resource type="Texture2D" uid="uid://dj5s5jhm2mbhr" path="res://Sprites/Fish_Test.png" id="2_xj86x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2ykt"]
 radius = 7.0
@@ -17,13 +17,13 @@ radius = 16.03122
 z_index = 1
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("1_j2ykt")
+script = ExtResource("1_oosto")
 sprite = NodePath("FishTest")
 latch_point = NodePath("LatchPoint")
 hook_area = NodePath("HookArea")
 
 [node name="FishTest" type="Sprite2D" parent="." unique_id=1611488829]
-texture = ExtResource("1_8um3m")
+texture = ExtResource("2_xj86x")
 
 [node name="LatchPoint" type="Node2D" parent="." unique_id=785466276]
 position = Vector2(6, 2)

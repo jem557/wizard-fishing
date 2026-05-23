@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj5s5jhm2mbhr"
-path="res://.godot/imported/Fish_Test.png-685457bf61f793cc3af0187f2be9c1c7.ctex"
+uid="uid://coyxdt4lbgh77"
+path="res://.godot/imported/Hook.png-78c9d60f08e45f88d5845ff0b6d7dc19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fish_Test.png"
-dest_files=["res://.godot/imported/Fish_Test.png-685457bf61f793cc3af0187f2be9c1c7.ctex"]
+source_file="res://Sprites/Hook.png"
+dest_files=["res://.godot/imported/Hook.png-78c9d60f08e45f88d5845ff0b6d7dc19.ctex"]
 
 [params]
 
