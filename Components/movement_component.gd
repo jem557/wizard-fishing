@@ -12,6 +12,7 @@ extends Node
 var move_dir = Vector2.ZERO
 var rotation_angle_rad : float
 var angular_velocity : float = 0.0
+var hooked : bool = false
 
 func tick(delta)->void:
 	if body == null:
