@@ -4,10 +4,19 @@
 [ext_resource type="Script" uid="uid://bmle53grg1ns0" path="res://Components/movement_component.gd" id="1_p6g6f"]
 [ext_resource type="Texture2D" uid="uid://dj5s5jhm2mbhr" path="res://Sprites/Fish_Test.png" id="2_4ime7"]
 [ext_resource type="Script" uid="uid://vwqptnps22e1" path="res://Components/behavior_component.gd" id="4_b7djs"]
+[ext_resource type="Script" uid="uid://fwxqev8s5ye5" path="res://detection_component.gd" id="5_mwdad"]
 
-[node name="Carp" type="CharacterBody2D" unique_id=1596293859 node_paths=PackedStringArray("movement_component")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b7djs"]
+radius = 4.0
+height = 22.0
+
+[node name="Carp" type="CharacterBody2D" unique_id=1596293859 node_paths=PackedStringArray("movement_component", "behavior_component", "detection_component")]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_64w8b")
 movement_component = NodePath("MovementComponent")
+behavior_component = NodePath("BehaviorComponent")
+detection_component = NodePath("DetectionComponent")
 metadata/_custom_type_script = "uid://6vpkxc3d6r2v"
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=972082948]
@@ -17,9 +26,20 @@ texture = ExtResource("2_4ime7")
 script = ExtResource("1_p6g6f")
 body = NodePath("..")
 sprite = NodePath("../Sprite")
+speed = 50.0
+deceleration = 100.0
 metadata/_custom_type_script = "uid://bmle53grg1ns0"
 
-[node name="BehaviorComponent" type="Node" parent="." unique_id=479443516]
+[node name="BehaviorComponent" type="Node" parent="." unique_id=479443516 node_paths=PackedStringArray("body")]
 script = ExtResource("4_b7djs")
-fear = 10
+body = NodePath("..")
 metadata/_custom_type_script = "uid://vwqptnps22e1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1763884399]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_b7djs")
+
+[node name="DetectionComponent" type="Node2D" parent="." unique_id=1736351186]
+script = ExtResource("5_mwdad")
+ray_object = true
+metadata/_custom_type_script = "uid://fwxqev8s5ye5"

@@ -22,15 +22,24 @@ func tick(delta)->void:
 		body.velocity = body.velocity.move_toward(move_dir * speed, deceleration * delta)
 	body.move_and_slide()
 
-func _rotate(delta) -> void:
+func _rotateX(delta) -> void:
 	rotation_angle_rad = deg_to_rad(max_rotation_angle)
 	var target_rotation = clampf(body.velocity.x / speed, -1, 1) * rotation_angle_rad
 	var error = target_rotation - body.rotation
 	angular_velocity = lerpf(angular_velocity, error * 15.0, 2.0 * delta)
 	body.rotation += angular_velocity * delta
 	
+func _rotateY(delta) -> void:
+	rotation_angle_rad = deg_to_rad(max_rotation_angle)
+	var direction = signf(body.velocity.x)
+	var target_rotation = clampf(body.velocity.y / speed, -1, 1) * rotation_angle_rad * direction
+	var error = target_rotation - body.rotation
+	angular_velocity = lerpf(angular_velocity, error * 15.0, 2.0 * delta)
+	body.rotation += angular_velocity * delta
+	
 func _flip() -> void:
 	if body.velocity.x > 0:
-		sprite.flip_h = true
-	elif body.velocity.x < 0:
 		sprite.flip_h = false
+	elif body.velocity.x < 0:
+		sprite.flip_h = true
+	

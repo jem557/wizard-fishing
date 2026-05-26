@@ -1,14 +1,27 @@
 [gd_scene format=3 uid="uid://cgwamnymj8he8"]
 
-[ext_resource type="PackedScene" uid="uid://b1k4agqlo0icn" path="res://Scenes/Standard_hook.tscn" id="2_vvh5c"]
+[ext_resource type="PackedScene" uid="uid://d0mmnss6n6gx" path="res://Scenes/carp.tscn" id="2_pyidc"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pq8q7"]
+normal = Vector2(0, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pyidc"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_28aoi"]
+normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vvh5c"]
 
 [node name="root" type="Node2D" unique_id=9119155]
 
-[node name="Player_Hook" parent="." unique_id=469962134 instance=ExtResource("2_vvh5c")]
+[node name="top_wall" type="StaticBody2D" parent="." unique_id=355522306 groups=["wall"]]
+position = Vector2(0, -87)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top_wall" unique_id=1523945790]
+shape = SubResource("WorldBoundaryShape2D_pq8q7")
 
 [node name="left_wall" type="StaticBody2D" parent="." unique_id=261863689 groups=["wall"]]
 position = Vector2(-170, 0)
@@ -16,7 +29,6 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left_wall" unique_id=518241574]
-rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_pyidc")
 
 [node name="right_wall" type="StaticBody2D" parent="." unique_id=607676138 groups=["wall"]]
@@ -25,8 +37,51 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right_wall" unique_id=1532177329]
-rotation = 4.712389
+shape = SubResource("WorldBoundaryShape2D_28aoi")
+
+[node name="bot_wall" type="StaticBody2D" parent="." unique_id=1146369026 groups=["wall"]]
+position = Vector2(0, 90)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bot_wall" unique_id=1316801871]
 shape = SubResource("WorldBoundaryShape2D_vvh5c")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=278774220]
 zoom = Vector2(3, 3)
+
+[node name="Carp" parent="." unique_id=1596293859 instance=ExtResource("2_pyidc")]
+position = Vector2(13, 7)
+
+[node name="Carp2" parent="." unique_id=409968056 instance=ExtResource("2_pyidc")]
+position = Vector2(-58, -18)
+
+[node name="Carp3" parent="." unique_id=154425492 instance=ExtResource("2_pyidc")]
+position = Vector2(-79, 31)
+
+[node name="Carp12" parent="." unique_id=987665473 instance=ExtResource("2_pyidc")]
+position = Vector2(-171, 0)
+
+[node name="Carp11" parent="." unique_id=562494292 instance=ExtResource("2_pyidc")]
+position = Vector2(-152, 0)
+
+[node name="Carp10" parent="." unique_id=2037787359 instance=ExtResource("2_pyidc")]
+position = Vector2(-133, 0)
+
+[node name="Carp9" parent="." unique_id=1168838166 instance=ExtResource("2_pyidc")]
+position = Vector2(-114, 0)
+
+[node name="Carp8" parent="." unique_id=408227300 instance=ExtResource("2_pyidc")]
+position = Vector2(-95, 0)
+
+[node name="Carp7" parent="." unique_id=1830143029 instance=ExtResource("2_pyidc")]
+position = Vector2(-76, 0)
+
+[node name="Carp6" parent="." unique_id=1929621838 instance=ExtResource("2_pyidc")]
+position = Vector2(-57, 0)
+
+[node name="Carp5" parent="." unique_id=490799937 instance=ExtResource("2_pyidc")]
+position = Vector2(-38, 0)
+
+[node name="Carp4" parent="." unique_id=687269886 instance=ExtResource("2_pyidc")]
+position = Vector2(-19, 0)
