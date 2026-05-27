@@ -31,6 +31,3 @@ func _roam(detection_component: DetectionComponent) -> void:
 
 func _findpack()->void:
 	pass
-
-func _hooked(detection_component: DetectionComponent)->void:
-	hooked = true

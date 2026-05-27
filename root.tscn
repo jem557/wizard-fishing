@@ -63,4 +63,4 @@ position = Vector2(-38, 0)
 position = Vector2(-19, 0)
 
 [node name="Player_Hook" parent="." unique_id=34557212 instance=ExtResource("2_vvh5c")]
-position = Vector2(65, 5)
+position = Vector2(57, 4)

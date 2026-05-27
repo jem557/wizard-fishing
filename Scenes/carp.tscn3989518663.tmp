@@ -26,6 +26,12 @@ texture = ExtResource("2_4ime7")
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_b7djs")
 
+[node name="MouthRight" type="Node2D" parent="." unique_id=1382815341]
+position = Vector2(6, 3)
+
+[node name="MouthLeft" type="Node2D" parent="." unique_id=329071100]
+position = Vector2(-6, 3)
+
 [node name="MovementComponent" type="Node" parent="." unique_id=123075426 node_paths=PackedStringArray("body", "sprite")]
 script = ExtResource("1_p6g6f")
 body = NodePath("..")
@@ -40,10 +46,11 @@ script = ExtResource("4_b7djs")
 body = NodePath("..")
 metadata/_custom_type_script = "uid://vwqptnps22e1"
 
-[node name="DetectionComponent" type="Node2D" parent="." unique_id=1736351186]
+[node name="DetectionComponent" type="Node2D" parent="." unique_id=1736351186 node_paths=PackedStringArray("mouthright", "mouthleft")]
 script = ExtResource("5_mwdad")
 has_rays = true
 has_hook_area = true
-mouth_right_pos = Vector2(6, 1)
-mouth_left_pos = Vector2(-6, 1)
+hook_area_size = 4.0
+mouthright = NodePath("../MouthRight")
+mouthleft = NodePath("../MouthLeft")
 metadata/_custom_type_script = "uid://fwxqev8s5ye5"

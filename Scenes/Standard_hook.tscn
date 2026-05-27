@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://cbcf4648edfji"
 texture = ExtResource("1_ftent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1233754801]
-position = Vector2(-0.5, 3)
+position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_c7l2t")
 
 [node name="InputComponent" type="Node" parent="." unique_id=1910049269]
@@ -32,3 +32,6 @@ body = NodePath("..")
 acceleration = 20.0
 deceleration = 40.0
 metadata/_custom_type_script = "uid://bmle53grg1ns0"
+
+[node name="HookPoint" type="Node2D" parent="." unique_id=111662934]
+position = Vector2(0, 8)

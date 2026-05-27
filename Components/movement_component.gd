@@ -14,14 +14,15 @@ var rotation_angle_rad : float
 var angular_velocity : float = 0.0
 var hooked : bool = false
 
-func tick(delta)->void:
-	if body == null:
-		return
-	if move_dir != Vector2.ZERO:
-		body.velocity = body.velocity.move_toward(move_dir * speed, acceleration * delta)
-	else:
-		body.velocity = body.velocity.move_toward(move_dir * speed, deceleration * delta)
-	body.move_and_slide()
+func move(delta)->void:
+	if not hooked:
+		if body == null:
+			return
+		if move_dir != Vector2.ZERO:
+			body.velocity = body.velocity.move_toward(move_dir * speed, acceleration * delta)
+		else:
+			body.velocity = body.velocity.move_toward(move_dir * speed, deceleration * delta)
+		body.move_and_slide()
 
 func _rotateX(delta) -> void:
 	rotation_angle_rad = deg_to_rad(max_rotation_angle)
@@ -31,16 +32,21 @@ func _rotateX(delta) -> void:
 	body.rotation += angular_velocity * delta
 	
 func _rotateY(delta) -> void:
-	rotation_angle_rad = deg_to_rad(max_rotation_angle)
-	var direction = signf(body.velocity.x)
-	var target_rotation = clampf(body.velocity.y / speed, -1, 1) * rotation_angle_rad * direction
-	var error = target_rotation - body.rotation
-	angular_velocity = lerpf(angular_velocity, error * 15.0, 2.0 * delta)
-	body.rotation += angular_velocity * delta
+	if not hooked:
+		rotation_angle_rad = deg_to_rad(max_rotation_angle)
+		var direction = signf(body.velocity.x)
+		var target_rotation = clampf(body.velocity.y / speed, -1, 1) * rotation_angle_rad * direction
+		var error = target_rotation - body.rotation
+		angular_velocity = lerpf(angular_velocity, error * 15.0, 2.0 * delta)
+		body.rotation += angular_velocity * delta
 	
-func _flip() -> void:
-	if body.velocity.x > 0:
-		sprite.flip_h = false
-	elif body.velocity.x < 0:
-		sprite.flip_h = true
-	
+func _flip(dtcomp : DetectionComponent) -> void:
+	if not hooked:
+		if body.velocity.x > 0:
+			sprite.flip_h = false
+			dtcomp._toggle_hook_area("hook_left", false)
+			dtcomp._toggle_hook_area("hook_right", true)
+		elif body.velocity.x < 0:
+			sprite.flip_h = true
+			dtcomp._toggle_hook_area("hook_left", true)
+			dtcomp._toggle_hook_area("hook_right", false)
