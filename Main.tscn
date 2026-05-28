@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cgwamnymj8he8"]
 
-[ext_resource type="PackedScene" uid="uid://d0mmnss6n6gx" path="res://Scenes/carp.tscn" id="2_pyidc"]
-[ext_resource type="PackedScene" uid="uid://b1k4agqlo0icn" path="res://Scenes/Standard_hook.tscn" id="2_vvh5c"]
+[ext_resource type="PackedScene" uid="uid://d0mmnss6n6gx" path="res://Scenes/Carp.tscn" id="1_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://b1k4agqlo0icn" path="res://Scenes/Standard_Hook.tscn" id="2_r0du0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pq8q7"]
 normal = Vector2(0, 1)
@@ -14,7 +14,7 @@ normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vvh5c"]
 
-[node name="root" type="Node2D" unique_id=9119155]
+[node name="Main" type="Node2D" unique_id=9119155]
 
 [node name="Walls" type="Node" parent="." unique_id=1152671569]
 
@@ -53,14 +53,14 @@ shape = SubResource("WorldBoundaryShape2D_vvh5c")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=278774220]
 zoom = Vector2(3, 3)
 
-[node name="Carp" parent="." unique_id=1007134223 instance=ExtResource("2_pyidc")]
-position = Vector2(13, 7)
+[node name="Carp" parent="." unique_id=1007134223 instance=ExtResource("1_uu6xs")]
+position = Vector2(-5, -46)
 
-[node name="Carp5" parent="." unique_id=490799937 instance=ExtResource("2_pyidc")]
-position = Vector2(-38, 0)
+[node name="Carp5" parent="." unique_id=490799937 instance=ExtResource("1_uu6xs")]
+position = Vector2(57, -38)
 
-[node name="Carp4" parent="." unique_id=687269886 instance=ExtResource("2_pyidc")]
-position = Vector2(-19, 0)
+[node name="Carp4" parent="." unique_id=687269886 instance=ExtResource("1_uu6xs")]
+position = Vector2(-61, -27)
 
-[node name="Player_Hook" parent="." unique_id=34557212 instance=ExtResource("2_vvh5c")]
+[node name="Player_Hook" parent="." unique_id=34557212 instance=ExtResource("2_r0du0")]
 position = Vector2(57, 4)

@@ -14,6 +14,20 @@ config/name="Wizard_Fishing"
 run/main_scene="uid://cgwamnymj8he8"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[file_customization]
+
+folder_colors={
+"res://Scenes/": "red",
+"res://Scripts/": "orange",
+"res://Scripts/Classes/": "yellow",
+"res://Scripts/Components/": "green",
+"res://Scripts/States/": "teal",
+"res://Scripts/States/Fish States/": "blue",
+"res://Scripts/States/Hook States/": "red",
+"res://Sprites/": "yellow",
+"res://testing/": "gray"
+}
+
 [global_group]
 
 hook=""
@@ -56,4 +70,3 @@ lower={
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
-2d/snap/snap_2d_transforms_to_pixel=true
