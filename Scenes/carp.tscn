@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://fwxqev8s5ye5" path="res://Scripts/Components/Detection Component.gd" id="5_mwdad"]
 [ext_resource type="Script" uid="uid://4bnomx5htv07" path="res://Scripts/States/Fish States/Fish Wander.gd" id="6_t3lfn"]
 [ext_resource type="Script" uid="uid://db5qeteg1cfmx" path="res://Scripts/Classes/State Machine.gd" id="6_v5qca"]
+[ext_resource type="Script" uid="uid://cfua2gsci1mca" path="res://Scripts/Components/AttachmentComponent.gd" id="7_t3lfn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b7djs"]
 radius = 4.0
@@ -57,3 +58,7 @@ has_hook_area = true
 mouth_right_pos = Vector2(6, 1)
 mouth_left_pos = Vector2(-6, 1)
 metadata/_custom_type_script = "uid://fwxqev8s5ye5"
+
+[node name="AttachmentComponent" type="Node2D" parent="Components" unique_id=264521357]
+script = ExtResource("7_t3lfn")
+metadata/_custom_type_script = "uid://cfua2gsci1mca"
