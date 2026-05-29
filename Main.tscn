@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cgwamnymj8he8"]
 
-[ext_resource type="PackedScene" uid="uid://d0mmnss6n6gx" path="res://Scenes/Carp.tscn" id="1_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://d0mmnss6n6gx" path="res://Scenes/carp.tscn" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://b1k4agqlo0icn" path="res://Scenes/Standard_Hook.tscn" id="2_r0du0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pq8q7"]

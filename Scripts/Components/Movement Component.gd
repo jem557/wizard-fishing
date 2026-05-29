@@ -39,9 +39,9 @@ func _rotateY(delta) -> void:
 func _flip(dtcomp : DetectionComponent) -> void:
 	if body.velocity.x > 0:
 		sprite.flip_h = false
-		dtcomp._toggle_hook_area("hook_left", false)
-		dtcomp._toggle_hook_area("hook_right", true)
+		dtcomp._toggle_hook_area("area_left", false)
+		dtcomp._toggle_hook_area("area_right", true)
 	elif body.velocity.x < 0:
 		sprite.flip_h = true
-		dtcomp._toggle_hook_area("hook_left", true)
-		dtcomp._toggle_hook_area("hook_right", false)
+		dtcomp._toggle_hook_area("area_left", true)
+		dtcomp._toggle_hook_area("area_right", false)

@@ -3,7 +3,7 @@ class_name State
 
 signal Transitioned
 
-func Enter(_Body):
+func Enter(Parent : StateMachine):
 	pass
 	
 func Exit():

@@ -12,6 +12,7 @@ class_name StateMachine
 @export var movement_component : MovementComponent
 @export var behavior_component : BehaviorComponent
 @export var input_component : InputComponent
+@export var attachment_component : AttachmentComponent
 
 var current_state : State
 
@@ -36,6 +37,7 @@ func _physics_process(delta: float) -> void:
 		current_state.Physics_Update(delta)
 
 func on_child_transition(state, new_state_name):
+	print(state, new_state_name)
 	if state != current_state:
 		return
 	
@@ -55,4 +57,12 @@ func Initalize_Components() -> void:
 			movement_component.body = body
 			movement_component.sprite = sprite
 		if behavior_component:
+			behavior_component.rays = detection_component.rays
+			behavior_component.areas = detection_component.areas
 			behavior_component.body = body
+		if attachment_component:
+			attachment_component.body = body
+			if detection_component:
+				attachment_component._gen_AP()
+				detection_component.AP = attachment_component.get_children()
+				detection_component.initialize()
