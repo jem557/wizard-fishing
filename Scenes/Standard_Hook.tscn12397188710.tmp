@@ -9,7 +9,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7l2t"]
 radius = 4.5
 
-[node name="Player_Hook" type="CharacterBody2D" unique_id=34557212 groups=["hook"]]
+[node name="Player_Hook" type="CharacterBody2D" unique_id=34557212]
 motion_mode = 1
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1464475419]
@@ -22,10 +22,12 @@ shape = SubResource("CircleShape2D_c7l2t")
 [node name="HookPoint" type="Node2D" parent="." unique_id=111662934]
 position = Vector2(0, 8)
 
-[node name="InputComponent" type="Node" parent="." unique_id=1910049269]
+[node name="Components" type="Node" parent="." unique_id=1597438266]
+
+[node name="InputComponent" type="Node" parent="Components" unique_id=1910049269]
 script = ExtResource("3_8jl6u")
 
-[node name="MovementComponent" type="Node" parent="." unique_id=1425320391]
+[node name="MovementComponent" type="Node" parent="Components" unique_id=1425320391]
 script = ExtResource("4_8jl6u")
 acceleration = 20.0
 deceleration = 40.0
@@ -35,12 +37,12 @@ script = ExtResource("5_t3ma8")
 initial_state = NodePath("HookMoving")
 body = NodePath("..")
 sprite = NodePath("../Sprite")
-movement_component = NodePath("../MovementComponent")
-input_component = NodePath("../InputComponent")
+movement_component = NodePath("../Components/MovementComponent")
+input_component = NodePath("../Components/InputComponent")
 metadata/_custom_type_script = "uid://db5qeteg1cfmx"
 
 [node name="HookMoving" type="Node" parent="StateMachine" unique_id=2009337701 node_paths=PackedStringArray("movement", "input")]
 script = ExtResource("6_qnb63")
-movement = NodePath("../../MovementComponent")
-input = NodePath("../../InputComponent")
+movement = NodePath("../../Components/MovementComponent")
+input = NodePath("../../Components/InputComponent")
 metadata/_custom_type_script = "uid://k8ylke1ykpsq"

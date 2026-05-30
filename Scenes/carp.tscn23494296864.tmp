@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://dj5s5jhm2mbhr" path="res://Sprites/Fish_Test.png" id="2_4ime7"]
 [ext_resource type="Script" uid="uid://vwqptnps22e1" path="res://Scripts/Components/Behavior Component.gd" id="4_b7djs"]
 [ext_resource type="Script" uid="uid://0kchsj3yn6ma" path="res://Scripts/States/Fish States/FishIdle.gd" id="4_h07dj"]
-[ext_resource type="Script" uid="uid://csgtmq1tgh1rs" path="res://Scripts/States/Fish States/FishHooked.gd" id="5_axd6t"]
 [ext_resource type="Script" uid="uid://fwxqev8s5ye5" path="res://Scripts/Components/Detection Component.gd" id="5_mwdad"]
 [ext_resource type="Script" uid="uid://4bnomx5htv07" path="res://Scripts/States/Fish States/Fish Wander.gd" id="6_t3lfn"]
 [ext_resource type="Script" uid="uid://db5qeteg1cfmx" path="res://Scripts/Classes/State Machine.gd" id="6_v5qca"]
@@ -51,29 +50,17 @@ behavior_component = NodePath("../BehaviorComponent")
 attachment_component = NodePath("../AttachmentComponent")
 metadata/_custom_type_script = "uid://db5qeteg1cfmx"
 
-[node name="FishWander" type="Node" parent="StateMachine" unique_id=492781893 node_paths=PackedStringArray("movement", "detection", "behavior", "attachment")]
+[node name="FishWander" type="Node" parent="StateMachine" unique_id=492781893 node_paths=PackedStringArray("movement", "detection", "behavior")]
 script = ExtResource("6_t3lfn")
 movement = NodePath("../../MovementComponent")
 detection = NodePath("../../DetectionComponent")
 behavior = NodePath("../../BehaviorComponent")
-attachment = NodePath("../../AttachmentComponent")
 metadata/_custom_type_script = "uid://4bnomx5htv07"
 
-[node name="FishIdle" type="Node" parent="StateMachine" unique_id=478780009 node_paths=PackedStringArray("movement", "detection", "behavior", "attachment")]
+[node name="FishIdle" type="Node" parent="StateMachine" unique_id=478780009 node_paths=PackedStringArray("movement")]
 script = ExtResource("4_h07dj")
 movement = NodePath("../../MovementComponent")
-detection = NodePath("../../DetectionComponent")
-behavior = NodePath("../../BehaviorComponent")
-attachment = NodePath("../../AttachmentComponent")
 metadata/_custom_type_script = "uid://0kchsj3yn6ma"
-
-[node name="FishHooked" type="Node" parent="StateMachine" unique_id=2084607556 node_paths=PackedStringArray("movement", "detection", "behavior", "attachment")]
-script = ExtResource("5_axd6t")
-movement = NodePath("../../MovementComponent")
-detection = NodePath("../../DetectionComponent")
-behavior = NodePath("../../BehaviorComponent")
-attachment = NodePath("../../AttachmentComponent")
-metadata/_custom_type_script = "uid://csgtmq1tgh1rs"
 
 [node name="MovementComponent" type="Node" parent="." unique_id=123075426]
 script = ExtResource("1_p6g6f")
@@ -85,10 +72,9 @@ metadata/_custom_type_script = "uid://bmle53grg1ns0"
 script = ExtResource("4_b7djs")
 metadata/_custom_type_script = "uid://vwqptnps22e1"
 
-[node name="DetectionComponent" type="Node2D" parent="." unique_id=1736351186 node_paths=PackedStringArray("attachment")]
+[node name="DetectionComponent" type="Node2D" parent="." unique_id=1736351186]
 z_index = 1
 script = ExtResource("5_mwdad")
-attachment = NodePath("../AttachmentComponent")
 has_rays = true
 has_hook_area = true
 metadata/_custom_type_script = "uid://fwxqev8s5ye5"

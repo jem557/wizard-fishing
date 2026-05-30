@@ -2,6 +2,8 @@
 class_name DetectionComponent
 extends Node2D
 
+@export var attachment : AttachmentComponent
+
 @export var has_rays : bool
 @export var has_hook_area : bool
 @export var hook_area_size : float = 3 : set = _set_hook_area_size
@@ -15,8 +17,10 @@ extends Node2D
 var AP : Array
 var areas : Array
 var rays : Array
+var active
 
 func _ready() -> void:
+	AP = attachment.attach_points
 	if Engine.is_editor_hint():
 		initialize()
 
@@ -24,7 +28,7 @@ func initialize():
 	if has_rays:
 		_rebuild_rays()
 	if has_hook_area:
-		_rebuild_Hook_areas(AP)	
+		_rebuild_Hook_areas()	
 
 #region Ray Functions
 
@@ -70,19 +74,19 @@ func _add_ray(direction: Vector2, length: float, ray_name : String) -> void:
 func _set_hook_area_size(val : float) -> void:
 	hook_area_size = val
 	if Engine.is_editor_hint():
-		_rebuild_Hook_areas(AP)
+		_rebuild_Hook_areas()
 
 func _create_hook_shape() -> CircleShape2D:
 	var circle = CircleShape2D.new()
 	circle.radius = hook_area_size
 	return circle
 
-func _rebuild_Hook_areas(Attach_point : Array):
+func _rebuild_Hook_areas():
 	for child in get_children():
 		if child is Area2D and child.is_in_group("hook_area"):
 			child.queue_free()
 			areas.clear()
-	for i in Attach_point:
+	for i in AP:
 		_add_hook_area(i.position, "area_" + i.name)
 
 func _add_hook_area(location : Vector2, area_name : String):
@@ -94,6 +98,7 @@ func _add_hook_area(location : Vector2, area_name : String):
 	area.name = area_name
 	area.position = location
 	collisionshape.shape = circle
+	area.body_entered.connect(attachment._attach.bind(area.name))
 	area.add_child(collisionshape)
 	area.add_to_group("hook_area")
 

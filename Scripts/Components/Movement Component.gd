@@ -11,6 +11,7 @@ var rotation_angle_rad : float
 var angular_velocity : float = 0.0
 var body
 var sprite
+var rotation_offset = 0
 
 func move(delta)->void:
 	if body == null:
@@ -21,9 +22,9 @@ func move(delta)->void:
 		body.velocity = body.velocity.move_toward(move_dir * speed, deceleration * delta)
 	body.move_and_slide()
 
-func _rotateX(delta) -> void:
+func _rotateX(delta, tracked_body) -> void:
 	rotation_angle_rad = deg_to_rad(max_rotation_angle)
-	var target_rotation = clampf(body.velocity.x / speed, -1, 1) * rotation_angle_rad
+	var target_rotation = rotation_offset + clampf(tracked_body.velocity.x / speed, -1, 1) * rotation_angle_rad
 	var error = target_rotation - body.rotation
 	angular_velocity = lerpf(angular_velocity, error * 15.0, 2.0 * delta)
 	body.rotation += angular_velocity * delta
@@ -31,7 +32,7 @@ func _rotateX(delta) -> void:
 func _rotateY(delta) -> void:
 	rotation_angle_rad = deg_to_rad(max_rotation_angle)
 	var direction = signf(body.velocity.x)
-	var target_rotation = clampf(body.velocity.y / speed, -1, 1) * rotation_angle_rad * direction
+	var target_rotation = rotation_offset + clampf(body.velocity.y / speed, -1, 1) * rotation_angle_rad * direction
 	var error = target_rotation - body.rotation
 	angular_velocity = lerpf(angular_velocity, error * 15.0, 2.0 * delta)
 	body.rotation += angular_velocity * delta
