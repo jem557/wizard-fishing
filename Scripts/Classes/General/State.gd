@@ -1,6 +1,8 @@
 extends Node
 class_name State
 
+@export var c_body : CharacterBody2D
+
 ## Not all components may be used. Fill out as necessary.
 @export_group("Set Components")
 @export var movement : MovementComponent

@@ -20,9 +20,8 @@ var rays : Array
 var active
 
 func _ready() -> void:
-	AP = attachment.attach_points
-	if Engine.is_editor_hint():
-		initialize()
+	if attachment:
+		AP = attachment.attach_points
 
 func initialize():
 	if has_rays:

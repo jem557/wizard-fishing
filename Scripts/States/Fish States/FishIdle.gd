@@ -9,7 +9,7 @@ func Enter():
 
 func Physics_Update(_delta: float):
 	seconds -= _delta
-	if attachment.attached: 
+	if c_body.attached: 
 		Transitioned.emit(self, "FishHooked")
 	else:
 		if seconds > 0:

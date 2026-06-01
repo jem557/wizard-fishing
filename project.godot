@@ -14,15 +14,26 @@ config/name="Wizard_Fishing"
 run/main_scene="uid://cgwamnymj8he8"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
 [file_customization]
 
 folder_colors={
 "res://Resources/": "pink",
 "res://Scenes/": "red",
 "res://Scripts/": "orange",
+"res://Scripts/Autoload/": "red",
 "res://Scripts/Classes/": "yellow",
 "res://Scripts/Components/": "green",
 "res://Scripts/States/": "teal",
+"res://Scripts/States/Camera States/": "purple",
 "res://Scripts/States/Fish States/": "blue",
 "res://Scripts/States/Hook States/": "red",
 "res://Sprites/": "yellow",
@@ -33,6 +44,7 @@ folder_colors={
 
 hook=""
 wall=""
+camera=""
 
 [input]
 

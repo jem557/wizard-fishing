@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://cgwamnymj8he8"]
 
-[ext_resource type="PackedScene" uid="uid://d0mmnss6n6gx" path="res://Scenes/carp.tscn" id="1_uu6xs"]
-[ext_resource type="PackedScene" uid="uid://b1k4agqlo0icn" path="res://Scenes/Standard_Hook.tscn" id="2_r0du0"]
+[ext_resource type="Script" uid="uid://cwhljlyjapvss" path="res://Scripts/CollectionArea.gd" id="1_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://lena2k777ri5" path="res://Scenes/PlayerCamera.tscn" id="1_r0du0"]
+[ext_resource type="PackedScene" uid="uid://b1k4agqlo0icn" path="res://Scenes/StandardHook.tscn" id="2_r0du0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0du0"]
+size = Vector2(340, 28)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pq8q7"]
 normal = Vector2(0, 1)
@@ -12,14 +16,22 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_28aoi"]
 normal = Vector2(-1, 0)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vvh5c"]
-
 [node name="Main" type="Node2D" unique_id=9119155]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=962992647]
+position = Vector2(0, -98)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_cm0pq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=713691364]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_r0du0")
 
 [node name="Walls" type="Node" parent="." unique_id=1152671569]
 
 [node name="top_wall" type="StaticBody2D" parent="Walls" unique_id=355522306 groups=["wall"]]
-position = Vector2(0, -87)
+position = Vector2(0, -108)
 collision_layer = 7
 collision_mask = 7
 
@@ -42,25 +54,9 @@ collision_mask = 7
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/right_wall" unique_id=1532177329]
 shape = SubResource("WorldBoundaryShape2D_28aoi")
 
-[node name="bot_wall" type="StaticBody2D" parent="Walls" unique_id=1146369026 groups=["wall"]]
-position = Vector2(0, 90)
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/bot_wall" unique_id=1316801871]
-shape = SubResource("WorldBoundaryShape2D_vvh5c")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=278774220]
+[node name="MainCamera" parent="." unique_id=1144494712 instance=ExtResource("1_r0du0")]
 zoom = Vector2(3, 3)
 
-[node name="Carp" parent="." unique_id=1007134223 instance=ExtResource("1_uu6xs")]
-position = Vector2(-5, -46)
+[node name="StandardHook" parent="." unique_id=34557212 instance=ExtResource("2_r0du0")]
 
-[node name="Carp5" parent="." unique_id=490799937 instance=ExtResource("1_uu6xs")]
-position = Vector2(57, -38)
-
-[node name="Carp4" parent="." unique_id=687269886 instance=ExtResource("1_uu6xs")]
-position = Vector2(-61, -27)
-
-[node name="Player_Hook" parent="." unique_id=34557212 instance=ExtResource("2_r0du0")]
-position = Vector2(57, 4)
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

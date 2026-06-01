@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://lena2k777ri5"]
+
+[ext_resource type="Script" uid="uid://cfua2gsci1mca" path="res://Scripts/Components/AttachmentComponent.gd" id="1_w1isw"]
+[ext_resource type="Script" uid="uid://db5qeteg1cfmx" path="res://Scripts/Classes/General/StateMachine.gd" id="2_if24v"]
+[ext_resource type="Script" uid="uid://cdkl6bf0jy1i6" path="res://Scripts/States/Camera States/CameraIdle.gd" id="3_o5ty8"]
+[ext_resource type="Script" uid="uid://ct0kfcioeefls" path="res://Scripts/States/Camera States/CameraFollow.gd" id="4_ro6et"]
+
+[node name="MainCamera" type="Camera2D" unique_id=1144494712 groups=["camera"]]
+
+[node name="AttachmentComponent" type="Node2D" parent="." unique_id=410195724]
+script = ExtResource("1_w1isw")
+debug_size = 1.0
+metadata/_custom_type_script = "uid://cfua2gsci1mca"
+
+[node name="StateMachine" type="Node" parent="." unique_id=1330919983 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_if24v")
+initial_state = NodePath("CameraFollow")
+metadata/_custom_type_script = "uid://db5qeteg1cfmx"
+
+[node name="CameraIdle" type="Node" parent="StateMachine" unique_id=988531256]
+script = ExtResource("3_o5ty8")
+metadata/_custom_type_script = "uid://cdkl6bf0jy1i6"
+
+[node name="CameraFollow" type="Node" parent="StateMachine" unique_id=1661080606 node_paths=PackedStringArray("attachment")]
+script = ExtResource("4_ro6et")
+attachment = NodePath("../../AttachmentComponent")
+metadata/_custom_type_script = "uid://ct0kfcioeefls"
