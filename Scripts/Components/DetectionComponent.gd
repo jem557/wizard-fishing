@@ -2,8 +2,6 @@
 class_name DetectionComponent
 extends Node2D
 
-@export var attachment : AttachmentComponent
-
 @export var has_rays : bool
 @export var has_hook_area : bool
 @export var hook_area_size : float = 3 : set = _set_hook_area_size
@@ -18,16 +16,16 @@ var AP : Array
 var areas : Array
 var rays : Array
 var active
+var body
 
-func _ready() -> void:
-	if attachment:
-		AP = attachment.attach_points
+signal hook_area_entered(body: Node2D, area_name: String)
 
-func initialize():
+func initialize(pbody) -> void:
+	body = pbody
 	if has_rays:
 		_rebuild_rays()
 	if has_hook_area:
-		_rebuild_Hook_areas()	
+		_rebuild_hook_areas()
 
 #region Ray Functions
 
@@ -73,14 +71,14 @@ func _add_ray(direction: Vector2, length: float, ray_name : String) -> void:
 func _set_hook_area_size(val : float) -> void:
 	hook_area_size = val
 	if Engine.is_editor_hint():
-		_rebuild_Hook_areas()
+		_rebuild_hook_areas()
 
 func _create_hook_shape() -> CircleShape2D:
 	var circle = CircleShape2D.new()
 	circle.radius = hook_area_size
 	return circle
 
-func _rebuild_Hook_areas():
+func _rebuild_hook_areas():
 	for child in get_children():
 		if child is Area2D and child.is_in_group("hook_area"):
 			child.queue_free()
@@ -97,7 +95,7 @@ func _add_hook_area(location : Vector2, area_name : String):
 	area.name = area_name
 	area.position = location
 	collisionshape.shape = circle
-	area.body_entered.connect(attachment._attach.bind(area.name))
+	area.body_entered.connect(_on_hook_area_entered.bind(area.name))
 	area.add_child(collisionshape)
 	area.add_to_group("hook_area")
 
@@ -111,5 +109,17 @@ func _toggle_hook_area(area_name : String, enable: bool):
 					col.debug_color = Color(0.002, 8.753, 11.287, 0.533)
 				else:
 					col.debug_color = Color(15.089, 0.0, 0.0, 0.38)
+
+func _on_hook_area_entered(h_body: Node2D, area_name: String) -> void:
+	hook_area_entered.emit(h_body, area_name)
+
+func flip():
+	if body:
+		if body.velocity.x > 0:
+			_toggle_hook_area("area_left", false)
+			_toggle_hook_area("area_right", true)
+		elif body.velocity.x < 0:
+			_toggle_hook_area("area_left", true)
+			_toggle_hook_area("area_right", false)
 
 #endregion

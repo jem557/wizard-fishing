@@ -14,8 +14,9 @@ var active_AP : Node2D
 var attached_AP : Node2D
 var attached_AC : AttachmentComponent
 
-func _ready() -> void:
-	body = get_parent()
+func initialize(pbody):
+	body = pbody
+	_gen_AP()
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():

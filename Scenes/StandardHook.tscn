@@ -8,6 +8,18 @@
 [ext_resource type="Script" uid="uid://cfua2gsci1mca" path="res://Scripts/Components/AttachmentComponent.gd" id="6_cc8yw"]
 [ext_resource type="Script" uid="uid://k8ylke1ykpsq" path="res://Scripts/States/Hook States/Hook Moving.gd" id="6_qnb63"]
 [ext_resource type="Script" uid="uid://26dtgakl2hiq" path="res://Resources/AttachPoint.gd" id="7_ppkf6"]
+[ext_resource type="Script" uid="uid://b85v88f413q8l" path="res://Scripts/Components/AnimationComponent.gd" id="9_d585w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lh3rt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ftent")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7l2t"]
 radius = 4.5
@@ -18,16 +30,18 @@ name = "hook"
 pos = Vector2(0, 7.5)
 metadata/_custom_type_script = "uid://26dtgakl2hiq"
 
-[node name="StandardHook" type="CharacterBody2D" unique_id=34557212 node_paths=PackedStringArray("sprite", "attachment_component", "input_component", "movement_component") groups=["hook"]]
+[node name="StandardHook" type="CharacterBody2D" unique_id=34557212 node_paths=PackedStringArray("attachment_component", "input_component", "movement_component") groups=["hook"]]
 motion_mode = 1
 script = ExtResource("1_ppkf6")
-sprite = NodePath("Sprite")
 attachment_component = NodePath("AttachmentComponent")
 input_component = NodePath("InputComponent")
 movement_component = NodePath("MovementComponent")
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=1464475419]
-texture = ExtResource("1_ftent")
+[node name="AnimationComponent" type="AnimatedSprite2D" parent="." unique_id=502235079]
+sprite_frames = SubResource("SpriteFrames_lh3rt")
+autoplay = "default"
+script = ExtResource("9_d585w")
+metadata/_custom_type_script = "uid://b85v88f413q8l"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1233754801]
 position = Vector2(0, 4)

@@ -9,12 +9,13 @@ func Enter():
 func Physics_Update(_delta: float):
 	seconds -= _delta
 	if c_body.attached:
-		Transitioned.emit(self, "FishHooked")
+		Transitioned.emit(self, "FishDead")
 	else:
 		if seconds >= 0:
 			movement.move_dir = behavior.move_dir
 			behavior._roam()
-			movement._flip(detection)
+			detection.flip()
+			animation.flip()
 			movement.move(_delta)
 			movement._rotateY(_delta)
 		else:

@@ -15,12 +15,14 @@ extends Node
 @export var y_lerp_dampening : float = 2.0
 @export_range(0,360) var y_max_rotation_angle : float = 22
 
+var body
 var move_dir = Vector2.ZERO
 var rotation_angle_rad : float
 var angular_velocity : float = 0.0
-var body
-var sprite
 var rotation_offset = 0
+
+func initialize(pbody):
+	body = pbody
 
 func move(delta)->void:
 	if body == null:
@@ -31,30 +33,20 @@ func move(delta)->void:
 		body.velocity = body.velocity.move_toward(move_dir * speed, deceleration * delta)
 	body.move_and_slide()
 
-func round_sprite():
-	sprite.global_position = body.global_position.round()
-
 func _rotateX(delta, tracked_body) -> void:
-	rotation_angle_rad = deg_to_rad(x_max_rotation_angle)
-	var target_rotation = rotation_offset + clampf(tracked_body.velocity.x / speed, -1, 1) * rotation_angle_rad
-	var error = target_rotation - body.rotation
-	angular_velocity = lerpf(angular_velocity, error * x_lerp_stiffness, x_lerp_dampening * delta)
-	body.rotation += angular_velocity * delta
+	if body:
+		rotation_angle_rad = deg_to_rad(x_max_rotation_angle)
+		var target_rotation = rotation_offset + clampf(tracked_body.velocity.x / speed, -1, 1) * rotation_angle_rad
+		var error = target_rotation - body.rotation
+		angular_velocity = lerpf(angular_velocity, error * x_lerp_stiffness, x_lerp_dampening * delta)
+		body.rotation += angular_velocity * delta
 	
 func _rotateY(delta) -> void:
-	rotation_angle_rad = deg_to_rad(y_max_rotation_angle)
-	var direction = signf(body.velocity.x)
-	var target_rotation = rotation_offset + clampf(body.velocity.y / speed, -1, 1) * rotation_angle_rad * direction
-	var error = target_rotation - body.rotation
-	angular_velocity = lerpf(angular_velocity, error * y_lerp_stiffness, y_lerp_dampening * delta)
-	body.rotation += angular_velocity * delta
+	if body:
+		rotation_angle_rad = deg_to_rad(y_max_rotation_angle)
+		var direction = signf(body.velocity.x)
+		var target_rotation = rotation_offset + clampf(body.velocity.y / speed, -1, 1) * rotation_angle_rad * direction
+		var error = target_rotation - body.rotation
+		angular_velocity = lerpf(angular_velocity, error * y_lerp_stiffness, y_lerp_dampening * delta)
+		body.rotation += angular_velocity * delta
 	
-func _flip(dtcomp : DetectionComponent) -> void:
-	if body.velocity.x > 0:
-		sprite.flip_h = false
-		dtcomp._toggle_hook_area("area_left", false)
-		dtcomp._toggle_hook_area("area_right", true)
-	elif body.velocity.x < 0:
-		sprite.flip_h = true
-		dtcomp._toggle_hook_area("area_left", true)
-		dtcomp._toggle_hook_area("area_right", false)

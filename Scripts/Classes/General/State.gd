@@ -10,6 +10,7 @@ class_name State
 @export var behavior : BehaviorComponent
 @export var attachment : AttachmentComponent
 @export var input : InputComponent
+@export var animation : AnimationComponent
 
 signal Transitioned
 
