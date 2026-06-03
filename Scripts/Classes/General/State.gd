@@ -5,12 +5,13 @@ class_name State
 
 ## Not all components may be used. Fill out as necessary.
 @export_group("Set Components")
-@export var movement : MovementComponent
-@export var detection : DetectionComponent
-@export var behavior : BehaviorComponent
-@export var attachment : AttachmentComponent
-@export var input : InputComponent
 @export var animation : AnimationComponent
+@export var attachment : AttachmentComponent
+@export var behavior : BehaviorComponent
+@export var detection : DetectionComponent
+@export var health : HealthComponent
+@export var input : InputComponent
+@export var movement : MovementComponent
 
 signal Transitioned
 

@@ -78,32 +78,34 @@ script = ExtResource("6_v5qca")
 initial_state = NodePath("FishWander")
 metadata/_custom_type_script = "uid://db5qeteg1cfmx"
 
-[node name="FishWander" type="Node" parent="StateMachine" unique_id=492781893 node_paths=PackedStringArray("c_body", "movement", "detection", "behavior", "attachment", "animation")]
+[node name="FishWander" type="Node" parent="StateMachine" unique_id=492781893 node_paths=PackedStringArray("c_body", "animation", "attachment", "behavior", "detection", "movement")]
 script = ExtResource("6_t3lfn")
 c_body = NodePath("../..")
-movement = NodePath("../../MovementComponent")
-detection = NodePath("../../DetectionComponent")
-behavior = NodePath("../../BehaviorComponent")
-attachment = NodePath("../../AttachmentComponent")
 animation = NodePath("../../AnimationComponent")
+attachment = NodePath("../../AttachmentComponent")
+behavior = NodePath("../../BehaviorComponent")
+detection = NodePath("../../DetectionComponent")
+movement = NodePath("../../MovementComponent")
 metadata/_custom_type_script = "uid://4bnomx5htv07"
 
-[node name="FishIdle" type="Node" parent="StateMachine" unique_id=478780009 node_paths=PackedStringArray("c_body", "movement", "detection", "behavior", "attachment")]
+[node name="FishIdle" type="Node" parent="StateMachine" unique_id=478780009 node_paths=PackedStringArray("c_body", "animation", "attachment", "behavior", "detection", "health", "movement")]
 script = ExtResource("4_h07dj")
 c_body = NodePath("../..")
-movement = NodePath("../../MovementComponent")
-detection = NodePath("../../DetectionComponent")
-behavior = NodePath("../../BehaviorComponent")
+animation = NodePath("../../AnimationComponent")
 attachment = NodePath("../../AttachmentComponent")
+behavior = NodePath("../../BehaviorComponent")
+detection = NodePath("../../DetectionComponent")
+health = NodePath("../../HealthComponent")
+movement = NodePath("../../MovementComponent")
 metadata/_custom_type_script = "uid://0kchsj3yn6ma"
 
-[node name="FishDead" type="Node" parent="StateMachine" unique_id=2084607556 node_paths=PackedStringArray("c_body", "movement", "detection", "behavior", "attachment")]
+[node name="FishDead" type="Node" parent="StateMachine" unique_id=2084607556 node_paths=PackedStringArray("c_body", "attachment", "behavior", "detection", "movement")]
 script = ExtResource("5_axd6t")
 c_body = NodePath("../..")
-movement = NodePath("../../MovementComponent")
-detection = NodePath("../../DetectionComponent")
-behavior = NodePath("../../BehaviorComponent")
 attachment = NodePath("../../AttachmentComponent")
+behavior = NodePath("../../BehaviorComponent")
+detection = NodePath("../../DetectionComponent")
+movement = NodePath("../../MovementComponent")
 metadata/_custom_type_script = "uid://csgtmq1tgh1rs"
 
 [node name="MovementComponent" type="Node" parent="." unique_id=123075426]
