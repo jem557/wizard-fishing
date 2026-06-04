@@ -12,6 +12,7 @@ class_name State
 @export var health : HealthComponent
 @export var input : InputComponent
 @export var movement : MovementComponent
+@export var stamina : StaminaComponent
 
 signal Transitioned
 

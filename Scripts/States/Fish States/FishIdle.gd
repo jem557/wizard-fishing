@@ -1,5 +1,6 @@
-extends State
 class_name FishIdle
+extends State
+
 
 var seconds : float
 
@@ -11,7 +12,7 @@ func Physics_Update(_delta: float):
 	seconds -= _delta
 	if not health.dead:
 		if c_body.attached: 
-			Transitioned.emit(self, "FishDead")
+			Transitioned.emit(self, "FishFight")
 		else:
 			if seconds > 0:
 				movement.move(_delta)

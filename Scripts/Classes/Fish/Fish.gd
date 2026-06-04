@@ -10,6 +10,7 @@ class_name Fish
 @export var movement_component : MovementComponent
 @export var animation_component : AnimationComponent
 @export var health_component : HealthComponent
+@export var stamina_component : StaminaComponent
 
 var attached : bool = false
 

@@ -7,16 +7,19 @@
 [ext_resource type="Script" uid="uid://vwqptnps22e1" path="res://Scripts/Components/BehaviorComponent.gd" id="4_b7djs"]
 [ext_resource type="Script" uid="uid://0kchsj3yn6ma" path="res://Scripts/States/Fish States/FishIdle.gd" id="4_h07dj"]
 [ext_resource type="Script" uid="uid://b85v88f413q8l" path="res://Scripts/Components/AnimationComponent.gd" id="4_w6trt"]
-[ext_resource type="Script" uid="uid://csgtmq1tgh1rs" path="res://Scripts/States/Fish States/FishHooked.gd" id="5_axd6t"]
+[ext_resource type="Script" uid="uid://csgtmq1tgh1rs" path="res://Scripts/States/Fish States/FishDead.gd" id="5_axd6t"]
 [ext_resource type="Script" uid="uid://fwxqev8s5ye5" path="res://Scripts/Components/DetectionComponent.gd" id="5_mwdad"]
 [ext_resource type="Script" uid="uid://4bnomx5htv07" path="res://Scripts/States/Fish States/Fish Wander.gd" id="6_t3lfn"]
 [ext_resource type="Script" uid="uid://db5qeteg1cfmx" path="res://Scripts/Classes/General/StateMachine.gd" id="6_v5qca"]
 [ext_resource type="Script" uid="uid://cfua2gsci1mca" path="res://Scripts/Components/AttachmentComponent.gd" id="7_t3lfn"]
 [ext_resource type="Script" uid="uid://26dtgakl2hiq" path="res://Resources/AttachPoint.gd" id="8_6knf2"]
+[ext_resource type="Script" uid="uid://3coxifw0am54" path="res://Scripts/States/Fish States/FishFight.gd" id="9_r8il8"]
 [ext_resource type="Script" uid="uid://cqt0wgx05x1jm" path="res://Scripts/Components/HealthComponent.gd" id="14_nghs7"]
+[ext_resource type="Script" uid="uid://v2q3e70isucv" path="res://Scripts/Components/StaminaComponent.gd" id="16_rlk8i"]
 
 [sub_resource type="Resource" id="Resource_ft62u"]
 script = ExtResource("2_00tcj")
+s_regen = 20
 strength = 25
 agility = 4
 intelligence = 2
@@ -50,7 +53,7 @@ pos = Vector2(14, 1)
 color = Color(0.4, 0.88235295, 0, 1)
 metadata/_custom_type_script = "uid://26dtgakl2hiq"
 
-[node name="Carp" type="CharacterBody2D" unique_id=105487856 node_paths=PackedStringArray("attachment_component", "behavior_component", "detection_component", "movement_component", "animation_component", "health_component") groups=["fish"]]
+[node name="Carp" type="CharacterBody2D" unique_id=105487856 node_paths=PackedStringArray("attachment_component", "behavior_component", "detection_component", "movement_component", "animation_component", "health_component", "stamina_component") groups=["fish"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 2
@@ -62,6 +65,7 @@ detection_component = NodePath("DetectionComponent")
 movement_component = NodePath("MovementComponent")
 animation_component = NodePath("AnimationComponent")
 health_component = NodePath("HealthComponent")
+stamina_component = NodePath("StaminaComponent")
 
 [node name="AnimationComponent" type="AnimatedSprite2D" parent="." unique_id=1031144534]
 sprite_frames = SubResource("SpriteFrames_nghs7")
@@ -78,13 +82,14 @@ script = ExtResource("6_v5qca")
 initial_state = NodePath("FishWander")
 metadata/_custom_type_script = "uid://db5qeteg1cfmx"
 
-[node name="FishWander" type="Node" parent="StateMachine" unique_id=492781893 node_paths=PackedStringArray("c_body", "animation", "attachment", "behavior", "detection", "movement")]
+[node name="FishWander" type="Node" parent="StateMachine" unique_id=492781893 node_paths=PackedStringArray("c_body", "animation", "attachment", "behavior", "detection", "health", "movement")]
 script = ExtResource("6_t3lfn")
 c_body = NodePath("../..")
 animation = NodePath("../../AnimationComponent")
 attachment = NodePath("../../AttachmentComponent")
 behavior = NodePath("../../BehaviorComponent")
 detection = NodePath("../../DetectionComponent")
+health = NodePath("../../HealthComponent")
 movement = NodePath("../../MovementComponent")
 metadata/_custom_type_script = "uid://4bnomx5htv07"
 
@@ -99,14 +104,27 @@ health = NodePath("../../HealthComponent")
 movement = NodePath("../../MovementComponent")
 metadata/_custom_type_script = "uid://0kchsj3yn6ma"
 
-[node name="FishDead" type="Node" parent="StateMachine" unique_id=2084607556 node_paths=PackedStringArray("c_body", "attachment", "behavior", "detection", "movement")]
+[node name="FishDead" type="Node" parent="StateMachine" unique_id=2084607556 node_paths=PackedStringArray("c_body", "attachment", "behavior", "detection", "health", "movement")]
 script = ExtResource("5_axd6t")
 c_body = NodePath("../..")
 attachment = NodePath("../../AttachmentComponent")
 behavior = NodePath("../../BehaviorComponent")
 detection = NodePath("../../DetectionComponent")
+health = NodePath("../../HealthComponent")
 movement = NodePath("../../MovementComponent")
 metadata/_custom_type_script = "uid://csgtmq1tgh1rs"
+
+[node name="FishFight" type="Node" parent="StateMachine" unique_id=135900373 node_paths=PackedStringArray("c_body", "animation", "attachment", "behavior", "detection", "health", "movement", "stamina")]
+script = ExtResource("9_r8il8")
+c_body = NodePath("../..")
+animation = NodePath("../../AnimationComponent")
+attachment = NodePath("../../AttachmentComponent")
+behavior = NodePath("../../BehaviorComponent")
+detection = NodePath("../../DetectionComponent")
+health = NodePath("../../HealthComponent")
+movement = NodePath("../../MovementComponent")
+stamina = NodePath("../../StaminaComponent")
+metadata/_custom_type_script = "uid://3coxifw0am54"
 
 [node name="MovementComponent" type="Node" parent="." unique_id=123075426]
 script = ExtResource("1_p6g6f")
@@ -141,3 +159,7 @@ metadata/_custom_type_script = "uid://cfua2gsci1mca"
 [node name="HealthComponent" type="Node" parent="." unique_id=1986479439]
 script = ExtResource("14_nghs7")
 metadata/_custom_type_script = "uid://cqt0wgx05x1jm"
+
+[node name="StaminaComponent" type="Node" parent="." unique_id=1623976279]
+script = ExtResource("16_rlk8i")
+metadata/_custom_type_script = "uid://v2q3e70isucv"

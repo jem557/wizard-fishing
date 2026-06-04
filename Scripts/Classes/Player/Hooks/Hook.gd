@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name hook
 
+@export var stats : PlayerStats
+
 @export_group("Components")
 @export var attachment_component : AttachmentComponent
 @export var behavior_component : BehaviorComponent

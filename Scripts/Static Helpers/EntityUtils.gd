@@ -20,3 +20,5 @@ static func Initalize_Components(entity) -> void:
 			entity.behavior_component.areas = entity.detection_component.areas
 	if "health_component" in entity and entity.health_component != null:
 		entity.health_component.initialize(entity)
+	if "stamina_component" in entity and entity.stamina_component != null:
+		entity.stamina_component.initialize(entity)

@@ -49,8 +49,8 @@ func _attach(attach_body : Node2D, AreaName : String):
 func _detach():
 	attached_body.attached = false
 	
-func _lock_position(AP : Node2D, H_AP : Node2D):
-	var offset = H_AP.global_position - AP.global_position
+func _lock_position(ap : Node2D, target_ap : Node2D):
+	var offset = target_ap.global_position - ap.global_position
 	body.global_position += offset
 
 func _follow(target, delta)-> void:
