@@ -15,6 +15,8 @@ func Enter():
 	detection._toggle_hook_area("area_" + AP.name, false)
 	movement.rotation_offset = 0
 	c_body.attached = true
+	movement.speed = 100
+	movement.acceleration = 20
 
 func Physics_Update(_delta: float):
 	if stamina.stamina > 0  and not resting and health._str > h_body.stats.strength:
@@ -27,7 +29,8 @@ func Physics_Update(_delta: float):
 	elif stamina.stamina <= 0:
 		resting = true
 	if resting:
-		h_body.attachment_component._lock_position(H_AP, AP)
+		c_body.attachment_component._lock_position(AP, H_AP)
+		movement._rotateY(_delta)
 		stamina.rest(_delta)
-	if stamina.stamina >= stamina.max_stamina:
-		resting = false
+		if stamina.stamina >= stamina.max_stamina:
+			resting = false
