@@ -19,6 +19,7 @@ func Enter():
 	movement.acceleration = 20
 
 func Physics_Update(_delta: float):
+	movement.move_dir = behavior.move_dir
 	if stamina.stamina > 0  and not resting and health._str > h_body.stats.strength:
 		h_body.attachment_component._lock_position(H_AP, AP)
 		behavior._roam()
