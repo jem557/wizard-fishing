@@ -16,7 +16,7 @@ func Physics_Update(_delta: float):
 		else:
 			if seconds > 0:
 				movement.move(_delta)
-				movement._rotateY(_delta)
+				movement._rotateY(_delta, c_body)
 			else:
 				Transitioned.emit(self, "FishWander")
 	else:

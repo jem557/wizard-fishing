@@ -33,6 +33,16 @@ func move(delta)->void:
 		body.velocity = body.velocity.move_toward(move_dir * speed, deceleration * delta)
 	body.move_and_slide()
 
+func hooked_move(p_str, h_str, _hook, delta) -> void:
+	if body == null:
+		return
+	var fish_force = move_dir * speed * p_str
+	var hook_force = _hook.velocity * h_str
+	var total_force = fish_force + hook_force
+	var target_velocity = total_force / (p_str + h_str)
+	body.velocity = body.velocity.move_toward(target_velocity, delta * (p_str + h_str))
+	body.move_and_slide()
+
 func _rotateX(delta, tracked_body) -> void:
 	if body:
 		rotation_angle_rad = deg_to_rad(x_max_rotation_angle)
@@ -41,11 +51,11 @@ func _rotateX(delta, tracked_body) -> void:
 		angular_velocity = lerpf(angular_velocity, error * x_lerp_stiffness, x_lerp_dampening * delta)
 		body.rotation += angular_velocity * delta
 	
-func _rotateY(delta) -> void:
+func _rotateY(delta, tracked_body) -> void:
 	if body:
 		rotation_angle_rad = deg_to_rad(y_max_rotation_angle)
-		var direction = signf(body.velocity.x)
-		var target_rotation = rotation_offset + clampf(body.velocity.y / speed, -1, 1) * rotation_angle_rad * direction
+		var direction = signf(tracked_body.velocity.x)
+		var target_rotation = rotation_offset + clampf(tracked_body.velocity.y / speed, -1, 1) * rotation_angle_rad * direction
 		var error = target_rotation - body.rotation
 		angular_velocity = lerpf(angular_velocity, error * y_lerp_stiffness, y_lerp_dampening * delta)
 		body.rotation += angular_velocity * delta

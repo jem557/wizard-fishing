@@ -13,7 +13,7 @@
 
 [sub_resource type="Resource" id="Resource_gbpf2"]
 script = ExtResource("2_lh3rt")
-strength = 3
+strength = 10
 metadata/_custom_type_script = "uid://cyov3gumm7hoj"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lh3rt"]

@@ -15,23 +15,27 @@ func Enter():
 	detection._toggle_hook_area("area_" + AP.name, false)
 	movement.rotation_offset = 0
 	c_body.attached = true
-	movement.speed = 100
-	movement.acceleration = 20
 
 func Physics_Update(_delta: float):
-	movement.move_dir = behavior.move_dir
-	if stamina.stamina > 0  and not resting and health._str > h_body.stats.strength:
-		h_body.attachment_component._lock_position(H_AP, AP)
-		behavior._roam()
-		movement._rotateY(_delta)
-		movement.move(_delta)
-		animation.flip()
-		stamina.drain(_delta)
-	elif stamina.stamina <= 0:
-		resting = true
-	if resting:
-		c_body.attachment_component._lock_position(AP, H_AP)
-		movement._rotateY(_delta)
-		stamina.rest(_delta)
-		if stamina.stamina >= stamina.max_stamina:
-			resting = false
+	if not health.dead:
+		movement.move_dir = behavior.move_dir
+		if stamina.stamina > 0  and not resting and health._str > h_body.stats.strength:
+			behavior._roam()
+			movement._rotateY(_delta, c_body)
+			movement.hooked_move(health._str, h_body.stats.strength, h_body,_delta)
+			animation.attached_flip(c_body ,AP)
+			stamina.drain(_delta)
+			h_body.attachment_component._lock_position(H_AP, AP)
+		elif stamina.stamina <= 0:
+			resting = true
+		if resting || health._str < h_body.stats.strength:
+			animation.attached_flip(h_body ,AP)
+			c_body.attachment_component._lock_position(AP, H_AP)
+			movement._rotateY(_delta,h_body)
+			stamina.rest(_delta)
+			if stamina.stamina >= stamina.max_stamina:
+				resting = false
+	else:
+		animation.reset_flip()
+		Transitioned.emit(self, "FishDead")
+	

@@ -24,10 +24,8 @@ func initialize(pbody):
 func rest(delta):
 	if stamina < max_stamina:
 		stamina += stamina_regen * delta
-		print("resting: ", stamina)
 	else:
 		return
 		
 func drain(delta):
 	stamina -= stamina_regen * delta
-	print("draining: ",stamina)

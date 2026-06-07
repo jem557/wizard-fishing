@@ -19,7 +19,7 @@ func Physics_Update(_delta: float):
 				detection.flip()
 				animation.flip()
 				movement.move(_delta)
-				movement._rotateY(_delta)
+				movement._rotateY(_delta, c_body)
 			else:
 				Transitioned.emit(self, "FishIdle")
 	else: 
