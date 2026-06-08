@@ -1,6 +1,8 @@
 class_name StaminaComponent
 extends Node
 
+@export var stamina_bar : ProgressBar
+
 var body
 
 var max_stamina : int

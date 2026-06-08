@@ -8,6 +8,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0du0"]
 size = Vector2(340, 28)
 
+[sub_resource type="Gradient" id="Gradient_fos0i"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3dxm6"]
+gradient = SubResource("Gradient_fos0i")
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pq8q7"]
 normal = Vector2(0, 1)
 
@@ -16,6 +23,13 @@ normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_28aoi"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="Gradient" id="Gradient_cm0pq"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.30980393, 0.7607843, 1, 0.13725491)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fos0i"]
+gradient = SubResource("Gradient_cm0pq")
 
 [node name="Main" type="Node2D" unique_id=9119155]
 
@@ -28,6 +42,11 @@ script = ExtResource("1_cm0pq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=713691364]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_r0du0")
+
+[node name="TestLine" type="Sprite2D" parent="Area2D" unique_id=32592171]
+position = Vector2(-0.5000006, 18.832539)
+scale = Vector2(1.3398438, 0.3349228)
+texture = SubResource("GradientTexture1D_3dxm6")
 
 [node name="Walls" type="Node" parent="." unique_id=1152671569]
 
@@ -62,5 +81,16 @@ zoom = Vector2(3, 3)
 
 [node name="Carp" parent="." unique_id=105487856 instance=ExtResource("4_cm0pq")]
 position = Vector2(-88, -47)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=902558410]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=482997467]
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 1.003
+offset_right = 0.30395508
+offset_bottom = 0.05596924
+texture = SubResource("GradientTexture1D_fos0i")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

@@ -53,6 +53,40 @@ pos = Vector2(14, 1)
 color = Color(0.4, 0.88235295, 0, 1)
 metadata/_custom_type_script = "uid://26dtgakl2hiq"
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56yig"]
+bg_color = Color(0, 0, 0, 0.43529412)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnxf4"]
+bg_color = Color(0, 0.5217332, 0.22681534, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 9
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlk8i"]
+bg_color = Color(0, 0, 0, 0.43529412)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hpqg3"]
+bg_color = Color(0.7323595, 0, 0.247423, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 9
+anti_aliasing = false
+
 [node name="Carp" type="CharacterBody2D" unique_id=105487856 node_paths=PackedStringArray("attachment_component", "behavior_component", "detection_component", "movement_component", "animation_component", "health_component", "stamina_component") groups=["fish"]]
 z_index = 1
 collision_layer = 2
@@ -67,10 +101,11 @@ animation_component = NodePath("AnimationComponent")
 health_component = NodePath("HealthComponent")
 stamina_component = NodePath("StaminaComponent")
 
-[node name="AnimationComponent" type="AnimatedSprite2D" parent="." unique_id=1031144534]
+[node name="AnimationComponent" type="AnimatedSprite2D" parent="." unique_id=1031144534 node_paths=PackedStringArray("bars")]
 sprite_frames = SubResource("SpriteFrames_nghs7")
 autoplay = "default"
 script = ExtResource("4_w6trt")
+bars = NodePath("../Node2D")
 metadata/_custom_type_script = "uid://b85v88f413q8l"
 
 [node name="BodyCollider" type="CollisionShape2D" parent="." unique_id=1763884399]
@@ -156,10 +191,50 @@ script = ExtResource("7_t3lfn")
 attach_points = Array[ExtResource("8_6knf2")]([SubResource("Resource_h07dj"), SubResource("Resource_axd6t")])
 metadata/_custom_type_script = "uid://cfua2gsci1mca"
 
-[node name="HealthComponent" type="Node" parent="." unique_id=1986479439]
+[node name="HealthComponent" type="Node" parent="." unique_id=1986479439 node_paths=PackedStringArray("health_bar")]
 script = ExtResource("14_nghs7")
+health_bar = NodePath("../Node2D/HealthBar")
 metadata/_custom_type_script = "uid://cqt0wgx05x1jm"
 
-[node name="StaminaComponent" type="Node" parent="." unique_id=1623976279]
+[node name="StaminaComponent" type="Node" parent="." unique_id=1623976279 node_paths=PackedStringArray("stamina_bar")]
 script = ExtResource("16_rlk8i")
+stamina_bar = NodePath("../Node2D/StaminaBar")
 metadata/_custom_type_script = "uid://v2q3e70isucv"
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1927824159]
+position = Vector2(0, -27)
+
+[node name="StaminaBar" type="ProgressBar" parent="Node2D" unique_id=1377888289]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -2.0
+offset_right = 17.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_56yig")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hnxf4")
+value = 100.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="Node2D" unique_id=91011984]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -2.0
+offset_right = 17.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_rlk8i")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hpqg3")
+value = 100.0
+show_percentage = false

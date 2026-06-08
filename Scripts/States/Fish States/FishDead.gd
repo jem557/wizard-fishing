@@ -22,5 +22,5 @@ func Physics_Update(_delta: float):
 		movement._rotateX(_delta, h_body)
 		attachment._lock_position(AP, H_AP)
 	elif not c_body.attached:
-		detection._toggle_hook_area("area_" + AP.name, true)
+		#detection._toggle_hook_area("area_" + AP.name, true)
 		Transitioned.emit(self, "FishSink")
