@@ -33,19 +33,19 @@ func initialize(pbody):
 func damage(amount : int):
 	hp = hp - amount
 	show_health_bar()
-	update_str(false)
+	update_str()
 
 func heal(amount : int):
 	hp = hp + amount
 	show_health_bar()
-	update_str(true)
+	update_str()
 	
 func revive(amount):
 	hp = amount
 	show_health_bar()
 	dead = false
 
-func update_str(restore : bool):
+func update_str():
 	if body is Fish:
 			hp_ratio = float(hp) / float(max_hp)
 			_str = base_str * sqrt(hp_ratio)

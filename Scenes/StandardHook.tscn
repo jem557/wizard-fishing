@@ -40,14 +40,14 @@ metadata/_custom_type_script = "uid://26dtgakl2hiq"
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.32099533), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_gbpf2"]
+[sub_resource type="CurveTexture" id="CurveTexture_lh3rt"]
 curve = SubResource("Curve_lh3rt")
 
 [sub_resource type="Gradient" id="Gradient_vhg7k"]
 offsets = PackedFloat32Array(0.010510511, 0.518018, 1)
 colors = PackedColorArray(0.4696201, 9.565987e-07, 2.6471912e-07, 1, 1, 0.7058824, 0.12156863, 1, 0.8173911, 0.7965039, 0.08777862, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_tp7pi"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gbpf2"]
 gradient = SubResource("Gradient_vhg7k")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0vu7q"]
@@ -63,8 +63,8 @@ initial_velocity_max = 19.38
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -2.2351742e-06
 radial_accel_max = -2.2351742e-06
-color_ramp = SubResource("GradientTexture1D_tp7pi")
-alpha_curve = SubResource("CurveTexture_gbpf2")
+color_ramp = SubResource("GradientTexture1D_gbpf2")
+alpha_curve = SubResource("CurveTexture_lh3rt")
 turbulence_enabled = true
 turbulence_noise_strength = 0.46
 turbulence_noise_speed_random = 0.0
@@ -117,9 +117,8 @@ metadata/_custom_type_script = "uid://k8ylke1ykpsq"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=699171570]
 visible = false
-emitting = false
 amount = 90
-lifetime = 0.41000000000000003
+lifetime = 0.41
 speed_scale = 0.6
 explosiveness = 0.02
 randomness = 0.85

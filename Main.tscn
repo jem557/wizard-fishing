@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://cwhljlyjapvss" path="res://Scripts/CollectionArea.gd" id="1_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://lena2k777ri5" path="res://Scenes/PlayerCamera.tscn" id="1_r0du0"]
 [ext_resource type="PackedScene" uid="uid://b1k4agqlo0icn" path="res://Scenes/StandardHook.tscn" id="2_r0du0"]
-[ext_resource type="PackedScene" uid="uid://d0mmnss6n6gx" path="res://Scenes/Carp.tscn" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://d0mmnss6n6gx" path="res://Scenes/carp.tscn" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://cy7wg81xeuvbd" path="res://test.tscn" id="5_fos0i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0du0"]
 size = Vector2(340, 28)
@@ -81,6 +82,9 @@ zoom = Vector2(3, 3)
 
 [node name="Carp" parent="." unique_id=105487856 instance=ExtResource("4_cm0pq")]
 position = Vector2(-88, -47)
+
+[node name="Node2D" parent="." unique_id=1920306403 instance=ExtResource("5_fos0i")]
+z_index = 999
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=902558410]
 visible = false
