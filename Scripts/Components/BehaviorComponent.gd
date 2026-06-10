@@ -24,6 +24,10 @@ func _roam() -> void:
 		elif not moving:
 			var angle = randf_range(0, TAU)
 			move_dir = Vector2(cos(angle), sin(angle))
+			if hooked:
+				move_dir.y = max(move_dir.y + 0.2, 0.0)
+				move_dir = move_dir.normalized()
+
 
 func _findpack()->void:
 	pass

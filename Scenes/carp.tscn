@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://d0mmnss6n6gx"]
+[gd_scene format=3 uid="uid://cpmd3aivtv8lj"]
 
 [ext_resource type="Script" uid="uid://110pcbywgs3n" path="res://Scripts/Classes/Fish/Carp.gd" id="1_1ot76"]
 [ext_resource type="Script" uid="uid://bmle53grg1ns0" path="res://Scripts/Components/MovementComponent.gd" id="1_p6g6f"]
@@ -42,15 +42,8 @@ height = 28.0
 
 [sub_resource type="Resource" id="Resource_h07dj"]
 script = ExtResource("8_6knf2")
-name = "left"
-pos = Vector2(-14, 1)
-metadata/_custom_type_script = "uid://26dtgakl2hiq"
-
-[sub_resource type="Resource" id="Resource_axd6t"]
-script = ExtResource("8_6knf2")
-name = "right"
+name = "mouth"
 pos = Vector2(14, 1)
-color = Color(0.4, 0.88235295, 0, 1)
 metadata/_custom_type_script = "uid://26dtgakl2hiq"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56yig"]
@@ -188,7 +181,7 @@ metadata/_custom_type_script = "uid://fwxqev8s5ye5"
 [node name="AttachmentComponent" type="Node2D" parent="." unique_id=264521357]
 z_index = 10
 script = ExtResource("7_t3lfn")
-attach_points = Array[ExtResource("8_6knf2")]([SubResource("Resource_h07dj"), SubResource("Resource_axd6t")])
+attach_points = Array[ExtResource("8_6knf2")]([SubResource("Resource_h07dj")])
 metadata/_custom_type_script = "uid://cfua2gsci1mca"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1986479439 node_paths=PackedStringArray("health_bar")]

@@ -16,9 +16,8 @@ func Physics_Update(_delta: float):
 			if seconds >= 0:
 				movement.move_dir = behavior.move_dir
 				behavior._roam()
-				detection.flip()
-				animation.flip()
 				movement.move(_delta)
+				c_body.update_facing_from_velocity(c_body.velocity)
 				movement._rotateY(_delta, c_body)
 			else:
 				Transitioned.emit(self, "FishIdle")

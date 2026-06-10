@@ -12,20 +12,30 @@ extends Node2D
 @export var ray_length_left : float = 20 : set = _set_ray_left
 @export var ray_length_right : float = 20 : set = _set_ray_right
 
-var AP : Array
-var areas : Array
+var mouth_area : Area2D
+var mouth_canonical : Vector2
+
 var rays : Array
 var active
 var body
 
-signal hook_area_entered(body: Node2D, area_name: String)
+var ray_parent
+var area_parent
+
+signal hook_area_entered(body: Node2D)
 
 func initialize(pbody) -> void:
 	body = pbody
 	if has_rays:
+		ray_parent = Node2D.new()
+		ray_parent.name = 'Rays'
+		add_child(ray_parent)
 		_rebuild_rays()
 	if has_hook_area:
-		_rebuild_hook_areas()
+		area_parent = Node2D.new()
+		area_parent.name = 'Areas'
+		add_child(area_parent)
+		_build_mouth_area()
 
 #region Ray Functions
 
@@ -59,6 +69,8 @@ func _rebuild_rays() -> void:
 
 func _add_ray(direction: Vector2, length: float, ray_name : String) -> void:
 	var ray := RayCast2D.new()
+	ray.set_collision_mask_value(1, false)
+	ray.set_collision_mask_value(3, true)
 	ray.target_position = direction * length
 	ray.name = ray_name
 	add_child(ray)
@@ -70,56 +82,39 @@ func _add_ray(direction: Vector2, length: float, ray_name : String) -> void:
 
 func _set_hook_area_size(val : float) -> void:
 	hook_area_size = val
-	if Engine.is_editor_hint():
-		_rebuild_hook_areas()
+	if mouth_area:
+		mouth_area.get_child(0).shape.radius = val
 
 func _create_hook_shape() -> CircleShape2D:
 	var circle = CircleShape2D.new()
 	circle.radius = hook_area_size
 	return circle
 
-func _rebuild_hook_areas():
-	for child in get_children():
-		if child is Area2D and child.is_in_group("hook_area"):
-			child.queue_free()
-			areas.clear()
-	for i in AP:
-		_add_hook_area(i.position, "area_" + i.name)
+func _build_mouth_area() -> void:
+	mouth_area = Area2D.new()
+	var col := CollisionShape2D.new()
+	col.shape = _create_hook_shape()
+	mouth_area.name = "mouth_area"
+	mouth_area.position = Vector2(mouth_canonical.x * body.facing, mouth_canonical.y)
+	mouth_area.add_child(col)
+	mouth_area.body_entered.connect(_on_mouth_entered)
+	mouth_area.add_to_group("hook_area")
+	area_parent.add_child(mouth_area)
 
-func _add_hook_area(location : Vector2, area_name : String):
-	var area := Area2D.new()
-	var collisionshape := CollisionShape2D.new()
-	var circle = _create_hook_shape()
-	add_child(area)
-	areas.append(area)
-	area.name = area_name
-	area.position = location
-	collisionshape.shape = circle
-	area.body_entered.connect(_on_hook_area_entered.bind(area.name))
-	area.add_child(collisionshape)
-	area.add_to_group("hook_area")
+func _on_facing_changed(dir : int) -> void:
+	if mouth_area:
+		mouth_area.position.x = mouth_canonical.x * dir
 
-func _toggle_hook_area(area_name : String, enable: bool):
-	if areas:
-		for i : Area2D in areas:
-			if i.name == area_name:
-				i.monitoring = enable
-				var col : CollisionShape2D = i.get_child(0)
-				if i.monitoring:
-					col.debug_color = Color(0.002, 8.753, 11.287, 0.533)
-				else:
-					col.debug_color = Color(15.089, 0.0, 0.0, 0.38)
+func _on_mouth_entered(h_body : Node2D) -> void:
+	hook_area_entered.emit(h_body)
+
+func set_mouth_enabled(enable : bool) -> void:
+	mouth_area.set_deferred("monitoring", false)
+	var col : CollisionShape2D = mouth_area.get_child(0)
+	col.debug_color = Color(0, 8.7, 11.2, 0.5) if enable else Color(15, 0, 0, 0.38)
+
 
 func _on_hook_area_entered(h_body: Node2D, area_name: String) -> void:
 	hook_area_entered.emit(h_body, area_name)
-
-func flip():
-	if body:
-		if body.velocity.x > 0:
-			_toggle_hook_area("area_left", false)
-			_toggle_hook_area("area_right", true)
-		elif body.velocity.x < 0:
-			_toggle_hook_area("area_left", true)
-			_toggle_hook_area("area_right", false)
 
 #endregion
