@@ -21,13 +21,18 @@ func _roam() -> void:
 		if avoid != Vector2.ZERO:
 			var spread := randf_range(-PI / 4, PI / 4)
 			move_dir = avoid.normalized().rotated(spread)
+			if hooked:
+				move_dir.y = max(move_dir.y + 0.2, 0.0)
+				move_dir = move_dir.normalized()
+				prints(1, move_dir)
 		elif not moving:
 			var angle = randf_range(0, TAU)
 			move_dir = Vector2(cos(angle), sin(angle))
 			if hooked:
 				move_dir.y = max(move_dir.y + 0.2, 0.0)
 				move_dir = move_dir.normalized()
-
+				prints(2, move_dir)
+				
 
 func _findpack()->void:
 	pass

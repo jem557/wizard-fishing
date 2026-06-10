@@ -20,15 +20,17 @@ func Physics_Update(_delta: float):
 	if not health.dead:
 		movement.move_dir = behavior.move_dir
 		if stamina.stamina > 0  and not resting and health._str > h_body.stats.strength:
+			print(1)
 			behavior._roam()
 			movement._rotateY(_delta, c_body)
 			movement.hooked_move(health._str, h_body.stats.strength, h_body,_delta)
-			c_body.update_facing_from_velocity(h_body.get_real_velocity())
+			c_body.update_facing_from_velocity(c_body.get_real_velocity())
 			stamina.drain(_delta)
 			h_body.attachment_component._lock_position(H_AP, AP)
 		elif stamina.stamina <= 0:
 			resting = true
 		if resting || health._str < h_body.stats.strength:
+			print(2)
 			c_body.update_facing_from_velocity(h_body.get_real_velocity())
 			c_body.attachment_component._lock_position(AP, H_AP)
 			movement._rotateY(_delta,h_body)
